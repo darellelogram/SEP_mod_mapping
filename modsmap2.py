@@ -1,15 +1,32 @@
+'''
+Format of HTML:
+<h2> Name of Uni </h2>
+<ul>
+<table class="newtab">
+<tbody>
+<tr><th>NUS Module</th><th>PU Module</th></tr>
+<tr>
+<td><b>CS2010</b> Data Structures and Algorithms II</td>    - NUS mod
+<td><b>CSCI2720</b> Data Structures</td>                    - overseas mod
+</tr>
+... more rows in the same format ...
+</tbody>
+</table>
+</ul>
+... more tables in the same format ...
+
+'''
+
 import csv
 
 # extract module codes for BZA degree reqs
 def getBZAmodcodes(fullModNamesFile, ModCodesFile):
-##    bzamodcodes = []
     bzamodcodes = dict()
     with open(fullModNamesFile) as infile:
         reader = csv.reader(infile, delimiter=',')
         line_count = 0
         for row in reader:
             if line_count == 0:
-##                bzamodcodes.append(row[0][3:9])
 
                 modcode = row[0][3:9]
                 modname = row[0][10:]
@@ -21,11 +38,8 @@ def getBZAmodcodes(fullModNamesFile, ModCodesFile):
                 while row[0][i] != ' ':
                     modcode += row[0][i]
                     i += 1
-##                while row[0][i] != '\n':
                 i += 1
                 modname += row[0][i:]
-##                    i += 1                    
-##                bzamodcodes.append(mod)
                 bzamodcodes[modcode] = modname
             line_count += 1
     with open(ModCodesFile, mode='w') as outfile:
@@ -36,7 +50,6 @@ def getBZAmodcodes(fullModNamesFile, ModCodesFile):
 
 bzamodcodes = getBZAmodcodes('BZAmods.csv', 'BZAmodcodes.csv')
 
-# extract overseas universities and modules offered
 f = open('overseasmods.txt', mode='r')
 if f.mode == 'r':
     contents = f.read()
@@ -48,7 +61,6 @@ if f.mode == 'r':
         if contents[i:i+4] == '<h2>':
             entry2 = dict();
             uni = ''
-            # start after the '<h2>'
             j = i+4
 
             # get name of uni
@@ -57,13 +69,10 @@ if f.mode == 'r':
                 j += 1
                 
             unis2[uni] = dict()
-##            NUS_mods = []
-##            PU_mods = []
             NUS_mods = dict()
             PU_mods = dict()
             isNUSmod = True
 
-            # start reading after '</h2>'
             k = j+5
             
             # read through all mods offered by uni
@@ -75,17 +84,14 @@ if f.mode == 'r':
                     while contents[k:k+4] != '</b>':
                         modcode += contents[k]
                         k += 1
-##                    print(modcode)
                     k += 4
                     modname = ''
                     while contents[k:k+5] != '</td>':
                         modname += contents[k]
                         k += 1
                     if isNUSmod:
-##                        NUS_mods.append([modcode)
                         NUS_mods[modcode] = modname
                     else:
-##                        PU_mods.append(modcode)
                         PU_mods[modcode] = modname
                     isNUSmod = not isNUSmod
                 k += 1
@@ -93,14 +99,13 @@ if f.mode == 'r':
             SOCmodcount = 0 # number of mappable SOC mods
             BZAmodcount = 0 # number of mappable BZA mods
             uni_BZAmods = [] # list of BZA mods offered by this uni
-##            uni_BZAmods = dict()
+
             # collate the stats for the number of SOC and BZA mods respectively
             for modcode, modname in NUS_mods.items():
                 SOCmodcount += 1
                 if modcode in bzamodcodes:
                     BZAmodcount += 1
                     uni_BZAmods.append(modcode+' '+modname)
-##                    uni_BZAmods[modcode] = modname
             
             entry2['NUS mods'] = NUS_mods
             entry2['PU mods'] = PU_mods
@@ -144,23 +149,7 @@ with open('overseasunis2.csv', mode='w') as unifile:
     for uni, details in unis2.items():
         writer.writerow([uni, details['stats']['SOCmodcount'], details['stats']['BZAmodcount']] \
                         + details['stats']['ListBZAmods'])
-'''
-<h2> Name of Uni </h2>
-<ul>
-<table class="newtab">
-<tbody>
-<tr><th>NUS Module</th><th>PU Module</th></tr>
-<tr>
-<td><b>CS2010</b> Data Structures and Algorithms II</td>    - NUS mod
-<td><b>CSCI2720</b> Data Structures</td>                    - overseas mod
-</tr>
-... more rows in the same format ...
-</tbody>
-</table>
-</ul>
-... more tables in the same format ...
 
-'''
 
 
         
