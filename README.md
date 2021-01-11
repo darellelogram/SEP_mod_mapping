@@ -11,7 +11,7 @@ On my faculty website (NUS School of Computing), there was information on all th
 This information was listed in tables, where each university had a table listing the Computing modules that could be mapped to that particular university.
 With the sheer number of universities and modules available, I wanted a way to collate all this information, perhaps in a csv format or something similar, so that the information was displayed neatly and easy to manage.
 
-At the time, I did not know about BeautifulSoup or any other HTML web sraping libraries out there. 
+At the time, I had not heard of BeautifulSoup or any other HTML web sraping libraries out there. 
 Me being me, I jumped into doing things the stupid way, without doing any background research. 
 I opened "Inspect" on my browser and looked at the HTML code on the faculty website, picking out the patterns that appeared in each table, such as:
 `<tr>`, `<ul>` etc. The original html is saved as a `.txt` file - `overseasmods.txt`.
@@ -25,10 +25,10 @@ I also had to differentiate between modules that would count towards my major, a
 + `BZAmodcodes.csv` is the module codes of all modules in the BZA curriculum, scraped from `BZAmods.csv`
 
 It is obvious that modules and universities have a many-to-many relationship. That is, a university can offer multiple modules that can be mapped to NUS modules, 
-while an NUS module may have multiple universities offering its mapped equivalent. `modsmap2.py` processes the information both ways, 
+while an NUS module may have multiple universities offering its mapped equivalent. `modsmap.py` processes the information both ways, 
 tracking the modules offered by every university as well as the all the universities that offer a particular module. Its output consists of 
-+ `mods_by_n_unis_offering2.csv` which displays each BZA module by the number of universities that offer it, as well as
-+ `overseasunis2.csv` which displays each overseas university and the number and list of mappable BZA modules.
++ `mods_by_n_unis_offering.csv` which displays each BZA module by the number of universities that offer it, as well as
++ `overseasunis.csv` which displays each overseas university and the number and list of mappable BZA modules.
 
 In `overlaps.py`, I compared the list of modules that appeared on the website to the list in `BZAmodcodes.csv`.
 It outputs the following: 
