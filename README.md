@@ -14,9 +14,12 @@ With the sheer number of universities and modules available, I wanted a way to c
 At the time, I had not heard of BeautifulSoup or any other HTML web sraping libraries out there. 
 Me being me, I jumped into doing things the stupid way, without doing any background research. 
 I opened "Inspect" on my browser and looked at the HTML code on the faculty website, picking out the patterns that appeared in each table, such as:
-`<tr>`, `<ul>` etc. The original html is saved as a `.txt` file - `overseasmods.txt`.
+`<tr>`, `<ul>` etc. The original html is saved in `overseasmods.txt`, and looked something like this:
+```
+<h2>Albert-Ludwig University of Freiburg</h2>  <ul>  <table class="newtab">  <tbody>  <tr><th>NUS Module</th><th>PU Module</th></tr>  <tr>  <td><b>CS2010</b> Data Structures and Algorithms II</td>  <td><b>CSCI2720</b> Data Structures</td>  </tr>  <tr>  <td><b>CS3244</b> Machine Learning</td>  <td><b>CS-433</b> Pattern Classification and Machine Learning</td>  </tr>  </tbody>  </table>  </ul>  <h2>Arizona State University</h2>  <ul>  <table class="newtab">  <tbody>  <tr><th>NUS Module</th><th>PU Module</th></tr>  <tr>  <td>IT1001 Introduction to Computing</td>  <td>CSE180 Computer Literacy</td>  </tr>  </tbody>  </table>  </ul>  <h2>Boston University</h2>  <ul>  <table class="newtab">  <tbody>  <tr><th>NUS Module</th><th>PU Module</th></tr>  <tr>  <td><b>CS1010J</b> Programming Methodology</td>  <td><b>CS111</b> Intro to Computer Science</td>  </tr>  <tr>  <td><b>CS2106</b> Introduction to Operating Systems</td>  <td><b>CS2106</b> Introduction to Operating Systems</td>  </tr>  <tr>  <td><b>CS2106</b> Introduction to Operating Systems</td>  <td><b>METCS575</b> Operating Systems</td>  </tr>  <tr>  <td><b>CS3230</b> Design and Analysis of Algorithms</td>  <td><b>CS566</b> Analysis of Algorithms</td>  </tr>  </tbody>  </table>  </ul>  <h2>Chalmers University</h2>  <ul>  <table class="newtab">  <tbody>  <tr><th>NUS Module</th><th>PU Module</th></tr>  <tr>  <td><b>CS2102</b> Database Systems</td>  <td><b>TDA357</b> Databases</td>  </tr>  </tbody>  </table>
+```
 
-With this knowledge, I built a very basic (or should I say primitive), but also highly specific, highly un-scalable web scraper.
+Armed with this knowledge, I built a very basic (or should I say primitive), but also highly specific, highly un-scalable web scraper.
 I also did some aggregation to display universities by the number of mappable modules they offered.
 
 Since not all School of Computing modules are part of my curriculum (Bachelor of Science in Business Analytics), 
