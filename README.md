@@ -26,7 +26,7 @@ I also had to differentiate between modules that would count towards my major, a
 
 It is obvious that modules and universities have a many-to-many relationship. That is, a university can offer multiple modules that can be mapped to NUS modules, 
 while an NUS module may have multiple universities offering its mapped equivalent. `modsmap2.py` processes the information both ways, 
-tracking the modules offered by every university as well as the all the universities that offer a module. Its output consists of 
+tracking the modules offered by every university as well as the all the universities that offer a particular module. Its output consists of 
 + `mods_by_n_unis_offering2.csv` which displays each BZA module by the number of universities that offer it, as well as
 + `overseasunis2.csv` which displays each overseas university and the number and list of mappable BZA modules.
 
